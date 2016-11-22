@@ -1,3 +1,5 @@
+package beans;
+
 public class Client {
     private String id;
     private String fullName;
