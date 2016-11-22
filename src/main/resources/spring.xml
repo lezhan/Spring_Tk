@@ -22,6 +22,11 @@
         <constructor-arg ref="dateFormat"/>
     </bean>
 
-    <bean id="dateFormat" class="java.text.DateFormat" factory-method="getDateInstance"/>
+    <bean id="dateFormat" class="java.text.DateFormat" factory-method="getDateTimeInstance"/>
+
+    <bean id="fileEventLogger" class="loggers.FileEventLogger" init-method="init">
+        <constructor-arg  value="src\main\resources\events_log.txt"/>
+    </bean>
+
 
 </beans>

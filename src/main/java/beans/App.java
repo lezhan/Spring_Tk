@@ -30,6 +30,7 @@ public class App {
 //        Client client = (Client) ctx.getBean("client");
 //        EventLogger eventLogger = (EventLogger) ctx.getBean("eventLogger");
         App app = (App) ctx.getBean("app");
+//        Event event = (Event) ctx.getBean("event", Event.class);
         Event event = (Event) ctx.getBean("event", Event.class);
         app.logEvent(event, "Some event for 1");
         app.logEvent(event, "Some event for 2");
