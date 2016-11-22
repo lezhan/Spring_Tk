@@ -10,9 +10,18 @@
 
     <bean id="eventLogger" class="loggers.ConsoleEventLogger"/>
 
-    <bean id="app" class="App">
+    <bean id="app" class="beans.App">
         <constructor-arg ref="client"/>
         <constructor-arg ref="eventLogger"/>
     </bean>
+
+    <bean name="event" class="beans.Event" scope="prototype">
+        <constructor-arg>
+            <bean class="java.util.Date"/>
+        </constructor-arg>
+        <constructor-arg ref="dateFormat"/>
+    </bean>
+
+    <bean id="dateFormat" class="java.text.DateFormat" factory-method="getDateInstance"/>
 
 </beans>
