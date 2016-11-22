@@ -27,7 +27,7 @@ public class App {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
 //        Client client = (Client) ctx.getBean("client");
 //        EventLogger eventLogger = (EventLogger) ctx.getBean("eventLogger");
-        App app = (App) ctx.getBean("App");
+        App app = (App) ctx.getBean("app");
         app.logEvent("Some event for 1");
         app.logEvent("Some event for 2");
     }
