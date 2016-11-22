@@ -34,8 +34,7 @@ public class Event {
         return "Event{" +
                 "id=" + id +
                 ", msg='" + msg + '\'' +
-                ", date=" + date +
-                ", dateFormat=" + dateFormat +
+                ", date=" + dateFormat.format(date) +
                 '}';
     }
 }
