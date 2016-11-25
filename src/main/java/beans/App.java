@@ -4,18 +4,25 @@ import loggers.EventLogger;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.util.Map;
+
 public class App {
     private Client client;
-    private EventLogger eventLogger;
+    private EventLogger defaultLogger;
+    private Map<EventType, EventLogger> loggers;
 
-    public App(Client client, EventLogger eventLogger) {
+    public App(Client client, EventLogger defaultLogger, Map<EventType, EventLogger> loggers) {
         this.client = client;
-        this.eventLogger = eventLogger;
+        this.defaultLogger = defaultLogger;
+        this.loggers = loggers;
     }
 
-    private void logEvent(Event event, String msg) {
+    private void logEvent(EventType eventType, Event event, String msg) {
         String message = msg.replaceAll(client.getId(), client.getFullName());
         event.setMsg(msg);
+        EventLogger eventLogger = loggers.get(eventType);
+        if (eventLogger == null)
+            eventLogger = defaultLogger;
         eventLogger.logEvent(event);
     }
 
@@ -31,10 +38,15 @@ public class App {
 //        EventLogger eventLogger = (EventLogger) ctx.getBean("eventLogger");
         App app = (App) ctx.getBean("app");
 //        Event event = (Event) ctx.getBean("event", Event.class);
-        Event event = ctx.getBean("event", Event.class);
-        app.logEvent(event, "Some event for 1");
+        Event event = ctx.getBean( Event.class);
+        app.logEvent(EventType.INFO, event, "Some event for 1");
+
         event =  ctx.getBean(Event.class);
-        app.logEvent(event, "Some event for 2");
+        app.logEvent(EventType.ERROR, event, "Some event for 2");
+
+        event =  ctx.getBean(Event.class);
+        app.logEvent(null, event, "Some event for 2");
+
         ctx.close();
     }
 }

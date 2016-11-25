@@ -8,11 +8,18 @@
     <bean id="client" class="beans.Client">
         <constructor-arg name="id" value="1"/>
         <constructor-arg name="fullName" value="Joan Smith"/>
+        <property name="greeting" value="Hello there!"/>
     </bean>
 
     <bean id="app" class="beans.App">
         <constructor-arg ref="client"/>
         <constructor-arg ref="eventLogger"/>
+        <constructor-arg>
+            <map>
+                <entry key="INFO" value-ref="eventLogger"/>
+                <entry key="ERROR" value-ref="combinedEventLogger"/>
+            </map>
+        </constructor-arg>
     </bean>
 
     <bean name="event" class="beans.Event" scope="prototype">
