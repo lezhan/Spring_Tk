@@ -4,6 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean id="eventLogger" class="loggers.ConsoleEventLogger"/>
+    <bean id="consoleEventLogger" class="loggers.ConsoleEventLogger"/>
 
     <bean id="fileEventLogger" class="loggers.FileEventLogger" init-method="init">
         <constructor-arg  value="src\main\resources\events_log.txt"/>
@@ -16,7 +17,7 @@
     <bean id="combinedEventLogger" class="loggers.CombinedEventLogger">
         <constructor-arg>
             <list>
-                <ref bean="eventLogger"/>
+                <ref bean="consoleEventLogger"/>
                 <ref bean="fileEventLogger"/>
             </list>
         </constructor-arg>
